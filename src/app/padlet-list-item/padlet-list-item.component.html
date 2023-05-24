@@ -1,0 +1,9 @@
+<div class="content">
+  <h3 class="header">{{ padlet?.name }}</h3>
+  <div *ngIf="padlet?.is_public === 1">
+    <i class="icon unlock alternate"></i> public
+  </div>
+  <div *ngIf="padlet?.is_public === 0">
+    <i class="icon lock"></i> private
+  </div>
+</div>

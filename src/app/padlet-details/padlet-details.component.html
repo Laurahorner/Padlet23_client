@@ -1,0 +1,43 @@
+<div *ngIf="padlet" class="ui container">
+  <h1>DETAILS</h1>
+  <hr class="orange">
+  <h2 class="ui header">{{ padlet?.name }}</h2>
+  <a *ngIf="authService.isLoggedIn()" class="ui tiny yellow labeled icon button" [routerLink]="['../../admin', padlet.id]">
+    <i class="write icon"></i> Padlet bearbeiten
+  </a>
+
+  <button *ngIf="authService.isLoggedIn()" class="ui tiny red labeled icon button" (click)="removePadlet()">
+    <i class="remove icon"></i> Padlet löschen
+  </button>
+  <a *ngIf="authService.isLoggedIn()" class="ui tiny green labeled icon button" [routerLink]="['../../entries']" [queryParams]="{padletId:padlet.id}">
+    <i class="plus icon"></i> Entry hinzufügen
+  </a>
+  <br *ngIf="authService.isLoggedIn()"><br *ngIf="authService.isLoggedIn()">
+  <br><br>
+  <div class="ui stackable grid">
+    <div class="four wide column" style="margin-bottom: 20px; padding-bottom: 0;" *ngFor="let entry of padlet.entries">
+      <div class="ui card">
+        <div class="content">
+          <div class="description">
+            {{ entry.entry_text }}
+          </div>
+        </div>
+
+        <a *ngIf="authService.isLoggedIn()" [routerLink]="['../../entries', entry.id]" class="ui vertical animated button" tabindex="0">
+          <div class="hidden content">Bearbeiten</div>
+          <div class="visible content">
+            <i class="edit icon"></i>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <br><br>
+
+  <button [routerLink]="'/padlets'" class="ui left labeled icon button" style="background-color: #ff8000; color: white;">
+    <i class="left arrow icon"></i>
+    Zurück zur Padletübersicht
+  </button>
+
+
+</div>

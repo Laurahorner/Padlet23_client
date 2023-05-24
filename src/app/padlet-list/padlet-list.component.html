@@ -1,0 +1,38 @@
+<div class="ui container">
+  <h1>PADLETS</h1>
+  <hr class="orange">
+  <h2>Übersicht über alle sichtbaren Padlets</h2><br>
+  <div class="ui stackable grid">
+    <div *ngFor="let padlet of padlets" class="four wide column" style="margin-bottom: 20px; padding-bottom: 0;">
+      <div *ngIf="authService.isLoggedOut() && padlet?.is_public == 1 || authService.isLoggedIn()" class="ui card content" style="padding: 20px;">
+        <a class="item bs-padlet-list-item"
+           [padlet]="padlet" [routerLink]="padlet.id.toString()">
+        </a>
+      </div>
+      <div *ngIf="authService.isLoggedOut() && padlet?.is_public == 0" class="ui card content disabled segment" style="padding: 20px;">
+        <a class="item bs-padlet-list-item"
+           [padlet]="padlet">
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  .ui.card.content:hover {
+    background-color: darkorange;
+  }
+
+  .ui.card.content:hover a {
+    color: white;
+  }
+
+  .ui.card.content a {
+    color: black;
+  }
+</style>
+
+
+
+

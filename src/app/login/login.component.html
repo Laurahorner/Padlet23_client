@@ -1,0 +1,46 @@
+<div *ngIf="!isLoggedIn()" class="ui container">
+    <h1>LOGIN</h1>
+    <hr class="orange">
+  <h3>Um alle Funktionalitäten des KWM-Padlets nutzen zu können, musst du dich einloggen!</h3><br>
+  <form class="ui large form" [formGroup]="loginForm"
+        (ngSubmit)="login()">
+    <div class="field">
+      <label>Username</label>
+      <input type="text" id="username" formControlName="username">
+      <div *ngIf="loginForm.get('username')?.invalid &&
+(loginForm.get('username')?.dirty ||
+loginForm.get('username')?.touched) &&
+loginForm.get('username')?.hasError('required')" class="ui negative
+message">
+        Benutzername ist verpflichtend </div>
+      <div *ngIf="loginForm.get('username')?.invalid &&
+(loginForm.get('username')?.dirty ||
+loginForm.get('username')?.touched) &&
+loginForm.get('username')?.hasError('username')" class="ui negative
+message">
+        Username überprüfen </div>
+    </div>
+    <div class="field">
+      <label>Passwort</label>
+      <input type="password" formControlName="password">
+      <div *ngIf="loginForm.get('password')?.invalid &&
+(loginForm.get('password')?.dirty ||
+loginForm.get('password')?.touched)" class="ui negative message">
+        Passwort ist verpflichtend </div>
+    </div>
+    <button type="submit" class="ui left labeled icon button"
+            [disabled]="loginForm.invalid">
+      <i class="sign-in icon"></i>
+      Login
+    </button>
+  </form>
+</div>
+<div *ngIf="isLoggedIn()" class="ui container">
+  <h1>LOGOUT</h1>
+  <hr class="orange">
+  <h3>Hiermit kannst du dich wieder ausloggen!</h3><br>
+  <button class="ui right labeled icon button" (click)="logout()">
+    <i class="sign-out icon"></i>
+    Logout
+  </button>
+</div>
